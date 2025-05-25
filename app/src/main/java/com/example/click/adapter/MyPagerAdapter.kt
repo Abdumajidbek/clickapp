@@ -3,28 +3,34 @@ package com.example.click.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
+import com.example.click.R
 import com.example.click.databinding.ItemPagerBinding
 import com.example.click.models.Mypager
 
-class MyPagerAdapter(val list:List<Mypager>): PagerAdapter() {
-    override fun getCount(): Int {
-        return list.size
+class MyPagerAdapter(private val list: List<Mypager>) :
+RecyclerView.Adapter<MyPagerAdapter.ViewHolder>() {
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val titleText: TextView = view.findViewById(R.id.titleText)
+        val descText: TextView = view.findViewById(R.id.descText)
+        val layout: View = view
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`   }
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val itemPagerBinding = ItemPagerBinding.inflate(LayoutInflater.from(container.context),container,false)
-        itemPagerBinding.img.setImageResource(list[position].image)
-        itemPagerBinding.txt1.text=list[position].title
-        itemPagerBinding.txt2.text=list[position].descriptio
-        container.addView(itemPagerBinding.root)
-        return itemPagerBinding.root
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_pager, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
+    override fun getItemCount(): Int = list.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = list[position]
+        holder.titleText.text = item.title
+        holder.descText.text = item.descriptio
+        holder.layout.setBackgroundResource(item.image)
     }
 }
