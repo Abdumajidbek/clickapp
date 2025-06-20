@@ -3,6 +3,9 @@ package com.example.click
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.click.databinding.ActivityMainBinding
+import com.example.click.fragment.Fragment_creat
+import com.example.click.fragment.Fragment_forget
+import com.example.click.fragment.Login
 import com.example.click.fragment.Signup
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, Signup())
+            .replace(R.id.main_container, Fragment_forget())
             .commit()
     }
 }

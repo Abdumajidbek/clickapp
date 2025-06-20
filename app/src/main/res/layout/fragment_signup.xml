@@ -9,4 +9,9 @@
         android:id="@+id/fragment_viewpager"
         android:layout_height="match_parent"
         />
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabid"
+        ></com.google.android.material.tabs.TabLayout>
 </LinearLayout>
