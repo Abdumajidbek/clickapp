@@ -5,13 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/signup1"
     android:orientation="vertical">
-
-    <!-- ID qo‘shildi -->
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    
 
     <Space
         android:layout_width="match_parent"
@@ -53,14 +47,13 @@
                 android:gravity="center"
                 android:text="All the best restaurants with their top \nmenu waiting for you, they cant’t wait \nfor your order!!"
                 android:textColor="@color/white" />
-
             <com.google.android.material.tabs.TabLayout
-                android:layout_gravity="center"
-                android:id="@+id/tabid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/transparent" />
+                android:layout_gravity="center"
+                android:id="@+id/tabid"
+               />
+
 
             <LinearLayout
                 android:layout_width="match_parent"

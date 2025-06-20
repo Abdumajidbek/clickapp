@@ -8,29 +8,39 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.click.R
 import com.example.click.databinding.ItemPagerBinding
+import com.example.click.databinding.ItemTabBinding
 import com.example.click.models.Mypager
 
-class MyPagerAdapter(private val list: List<Mypager>) :
-RecyclerView.Adapter<MyPagerAdapter.ViewHolder>() {
+class MyPagerAdapter(
+    private val list: List<Mypager>,
+    private val listener: OnPagerButtonClickListener
+) : RecyclerView.Adapter<MyPagerAdapter.VH>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleText: TextView = view.findViewById(R.id.titleText)
-        val descText: TextView = view.findViewById(R.id.descText)
-        val layout: View = view
+    interface OnPagerButtonClickListener {
+        fun onSkipClick()
+        fun onNextClick(currentPosition: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_pager, parent, false)
-        return ViewHolder(view)
+    inner class VH(val binding: ItemPagerBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val binding = ItemPagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VH(binding)
+    }
+
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        val item = list[position]
+        holder.binding.titleText.text = item.title
+        holder.binding.descText.text = item.descriptio
+
+        holder.binding.skipText.setOnClickListener {
+            listener.onSkipClick()
+        }
+
+        holder.binding.nextText.setOnClickListener {
+            listener.onNextClick(position)
+        }
     }
 
     override fun getItemCount(): Int = list.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position]
-        holder.titleText.text = item.title
-        holder.descText.text = item.descriptio
-        holder.layout.setBackgroundResource(item.image)
-    }
 }
